@@ -1,0 +1,103 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta name="viewport" content="width = 1050, user-scalable = no" />
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.js"></script>
+	<script src="https://js.leapmotion.com/leap-0.6.4.js"></script>
+	<script src="./leap-plugin.js"></script>
+	<script src="https://js.leapmotion.com/leap-widgets-0.1.0.js"></script>
+	<script src="./OrbitControls.js"></script>
+	<script type="text/javascript" src="../../extras/jquery.min.1.7.js"></script>
+	<script type="text/javascript" src="../../extras/modernizr.2.5.3.min.js"></script>
+</head>
+<body>
+
+	<div class="flipbook-viewport">
+		<div class="container">
+			<div class="flipbook">
+				<div class="one">Page 1</div>
+				<div class="two">Page 2</div>
+				<div class="three">Page 3</div>
+				<div class="four">Page 4</div>
+				<div class="five">Page 5</div>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	var controllerOptions = {enableGestures: true};
+	Leap.loop(controllerOptions, function(frame) {
+
+  // Display Gesture object data
+  if (frame.gestures.length > 0) {
+  	for (var i = 0; i < frame.gestures.length; i++) {
+  		var gesture = frame.gestures[i];
+  		if(gesture.type == "swipe") {
+          //Classify swipe as either horizontal or vertical
+          var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
+          //Classify as right-left or up-down
+          if(isHorizontal){
+          	if(gesture.direction[0] > 0){
+          		swipeDirection = "right";
+          		console.log(swipeDirection);
+          		$(".flipbook").turn("previous");
+          	} else {
+          		swipeDirection = "left";
+          		console.log(swipeDirection);
+          		$(".flipbook").turn("next");
+          	}
+          }
+        }
+      }
+    }
+
+  });
+
+	function loadApp() {
+
+	// Create the flipbook
+
+	$('.flipbook').turn({
+			// Width
+
+			width:922,
+			
+			// Height
+
+			height:600,
+
+			// Elevation
+
+			elevation: 50,
+			
+			// Enable gradients
+
+			gradients: true,
+			
+			// Auto center this flipbook
+
+			autoCenter: true
+
+		});
+}
+
+// Load the HTML4 version if there's not CSS transform
+
+yepnope({
+	test : Modernizr.csstransforms,
+	yep: ['../../lib/turn.js'],
+	nope: ['../../lib/turn.html4.min.js'],
+	both: ['css/basic.css'],
+	complete: loadApp
+});
+
+</script>
+
+</body>
+</html>
