@@ -7,6 +7,14 @@ body{
 	padding:0;
 }
 
+#fps{
+	text-align: center;
+
+}
+img.patient-img{
+	border-radius: 15%;
+}
+
 .flipbook-viewport{
 	overflow:hidden;
 	width:100%;
@@ -36,6 +44,7 @@ body{
 }
 
 .flipbook .page{
+ 	background-color: #F0EAD6;
 	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.2);
 	-moz-box-shadow:0 0 20px rgba(0,0,0,0.2);
 	-ms-box-shadow:0 0 20px rgba(0,0,0,0.2);
