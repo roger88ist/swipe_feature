@@ -32,8 +32,10 @@
 
 <script type="text/javascript">
 	var controllerOptions = {enableGestures: true};
+	// controllerOptions.config().setFloat("Gesture.Swipe.MinLength", 5000.0);
+	counter = 60;
 	Leap.loop(controllerOptions, function(frame) {
-
+	counter += 1;
   // Display Gesture object data
   if (frame.gestures.length > 0) {
   	for (var i = 0; i < frame.gestures.length; i++) {
@@ -46,16 +48,26 @@
           	if(gesture.direction[0] > 0){
           		swipeDirection = "right";
           		console.log(swipeDirection);
-          		$(".flipbook").turn("previous");
+          		if(counter >= 60){
+          			$(".flipbook").turn("previous");
+          			counter = 0;
+          		}
           	} else {
           		swipeDirection = "left";
           		console.log(swipeDirection);
-          		$(".flipbook").turn("next");
+          		if(counter >= 60){
+          			$(".flipbook").turn("next");
+          			counter = 0;
+          		}
           	}
           }
         }
       }
     }
+
+    function myFunction(){
+    	console.log("hello");
+    };
 
   });
 
