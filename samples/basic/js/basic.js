@@ -33,7 +33,7 @@ function loadPage(page, pageElement) {
 	});
 
 	img.load(function() {
-		
+
 		// Set the size
 		$(this).css({width: '100%', height: '100%'});
 
@@ -42,7 +42,7 @@ function loadPage(page, pageElement) {
 		$(this).appendTo(pageElement);
 
 		// Remove the loader indicator
-		
+
 		pageElement.find('.loader').remove();
 	});
 
@@ -54,7 +54,7 @@ function loadPage(page, pageElement) {
 
 
 function loadLargePage(page, pageElement) {
-	
+
 	var img = $('<img />');
 
 	img.load(function() {
@@ -63,17 +63,17 @@ function loadLargePage(page, pageElement) {
 		$(this).css({width: '100%', height: '100%'});
 		$(this).appendTo(pageElement);
 		prevImg.remove();
-		
+
 	});
 
 	// Loadnew page
-	
+
 	img.attr('src', 'pages/' +  page + '-large.jpg');
 }
 
 
 function loadSmallPage(page, pageElement) {
-	
+
 	var img = pageElement.find('img');
 
 	img.css({width: '100%', height: '100%'});
